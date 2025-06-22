@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // URL base da nossa API que está rodando no back-end
-const API_URL = 'http://192.168.3.9:3000/api/auth';
+const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api/auth`;
 
 /**
  * Função que envia as credenciais para a API e tenta fazer o login.
