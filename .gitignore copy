@@ -1,3 +1,9 @@
 node_modules
 .env
 database/database.db
+
+
+git remote add origin https://github.com/Emannuel01/music-app-frontend
+
+
+postgresql://musicapp_database_user:saScwWH8pr6V8tzsY4jYsgV3Bv19lbcX@dpg-d1c60umr433s7384c930-a/musicapp_database

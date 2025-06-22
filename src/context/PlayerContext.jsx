@@ -4,49 +4,42 @@ import { useNotification } from './NotificationContext.jsx';
 
 const PlayerContext = createContext(null);
 
-// --- LÓGICA DE PERSISTÊNCIA DO VOLUME ---
+// Lógica para carregar o volume salvo do localStorage
 const VOLUME_STORAGE_KEY = 'musicapp-volume';
 const savedVolume = localStorage.getItem(VOLUME_STORAGE_KEY);
 const initialVolume = savedVolume !== null ? parseFloat(savedVolume) : 1;
 
-
 export const PlayerProvider = ({ children }) => {
   const { showNotification } = useNotification();
 
-  // --- ESTADOS ---
-  // Player
+  // Estados do Player
   const [currentSong, setCurrentSong] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(initialVolume);
   
-  // Fila de Reprodução
+  // Estados da Fila de Reprodução (Queue)
   const [queue, setQueue] = useState([]);
   const [currentQueueIndex, setCurrentQueueIndex] = useState(-1);
 
-  // Modal de "Adicionar à Playlist"
+  // Estados do Modal "Adicionar à Playlist"
   const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
   const [userPlaylists, setUserPlaylists] = useState([]);
 
-  // Referência ao elemento <audio>
   const audioRef = useRef(null);
 
-  // --- EFEITOS ---
-
-  // Efeito para tocar a música quando 'currentSong' muda
+  // Efeitos
   useEffect(() => {
     if (currentSong && audioRef.current) {
       audioRef.current.play().catch(error => {
-        // Mostra uma notificação amigável se o arquivo de áudio não for encontrado no servidor
         console.error("Erro ao iniciar o play:", error);
-        showNotification("Erro ao carregar a música. O arquivo pode não existir.", 'error');
+        showNotification("Erro ao carregar o áudio. O arquivo pode ser inválido ou não foi encontrado.", 'error');
         setIsPlaying(false);
       });
     }
   }, [currentSong]);
 
-  // Efeito para salvar o volume no localStorage sempre que ele muda
   useEffect(() => {
     localStorage.setItem(VOLUME_STORAGE_KEY, volume);
     if (audioRef.current) {
@@ -54,11 +47,9 @@ export const PlayerProvider = ({ children }) => {
     }
   }, [volume]);
 
-
-  // --- FUNÇÕES DE CONTROLE DO PLAYER ---
-
+  // Funções de Controle do Player
   const playSong = (song, songList = []) => {
-    const songUrl = `${import.meta.env.VITE_BACKEND_URL}/api/audio/${song.id}/play`;
+    const songUrl = song.filename;
     
     if (currentSong?.id === song.id) {
       togglePlayPause();
@@ -103,8 +94,7 @@ export const PlayerProvider = ({ children }) => {
     setVolume(parseFloat(e.target.value));
   };
 
-  // --- FUNÇÕES DO MODAL ---
-
+  // Funções do Modal de Playlist
   const openAddToPlaylistModal = async () => {
     if (!currentSong) {
       showNotification("Nenhuma música tocando para adicionar.", "error");
@@ -115,7 +105,7 @@ export const PlayerProvider = ({ children }) => {
       setUserPlaylists(playlists);
       setIsPlaylistModalOpen(true);
     } catch (error) {
-      showNotification("Não foi possível carregar suas playlists.", error);
+      showNotification("Não foi possível carregar suas playlists.", "error");
     }
   };
 
@@ -132,7 +122,7 @@ export const PlayerProvider = ({ children }) => {
       showNotification(errorMessage, 'error');
     }
   };
-
+  
   const handleCreateAndAdd = async (newPlaylistName) => {
     if (!newPlaylistName.trim() || !currentSong) return;
     try {
@@ -154,7 +144,6 @@ export const PlayerProvider = ({ children }) => {
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
-  // Valor que será compartilhado com toda a aplicação
   const value = {
     currentSong, isPlaying, progress, duration, volume,
     playSong, togglePlayPause, playNext, playPrevious, handleSeek, handleVolumeChange, formatTime,
@@ -177,6 +166,4 @@ export const PlayerProvider = ({ children }) => {
   );
 };
 
-export const usePlayer = () => {
-  return useContext(PlayerContext);
-};
+export const usePlayer = () => useContext(PlayerContext);

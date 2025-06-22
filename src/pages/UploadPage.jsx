@@ -1,9 +1,12 @@
-// frontend/src/pages/UploadPage.jsx
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import './UploadPage.css'; // Importa nosso novo estilo
+import { useNotification } from '../context/NotificationContext';
+import './UploadPage.css';
 
 function UploadPage() {
+  const { showNotification } = useNotification();
+  
+  // CORREÇÃO: Estado inicializado corretamente
   const [formState, setFormState] = useState({
     music_name: '',
     author: '',
@@ -13,10 +16,8 @@ function UploadPage() {
   });
   const [audioFile, setAudioFile] = useState(null);
   const [imageFile, setImageFile] = useState(null);
-  const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Refs para os inputs de arquivo escondidos
   const audioInputRef = useRef(null);
   const imageInputRef = useRef(null);
 
@@ -26,27 +27,27 @@ function UploadPage() {
   };
 
   const handleFileChange = (e) => {
-    if (e.target.name === 'audiofile') {
-      setAudioFile(e.target.files[0]);
+    const { name, files } = e.target;
+    if (name === 'audiofile') {
+      setAudioFile(files[0]);
     } else {
-      setImageFile(e.target.files[0]);
+      setImageFile(files[0]);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!audioFile) {
-      setStatus('Por favor, selecione um arquivo de áudio.');
+      showNotification('Por favor, selecione um arquivo de áudio.', 'error');
       return;
     }
-    setStatus('Enviando...');
     setLoading(true);
 
     const data = new FormData();
     // Adiciona os campos de texto
-    for (const key in formState) {
+    Object.keys(formState).forEach(key => {
       data.append(key, formState[key]);
-    }
+    });
     // Adiciona os arquivos
     data.append('audiofile', audioFile);
     if (imageFile) {
@@ -55,15 +56,19 @@ function UploadPage() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/audio/upload`, data, {
+      await axios.post('http://localhost:3000/api/audio/upload', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`
         }
       });
-      setStatus(`Sucesso! ${response.data.message}`);
+      showNotification('Música enviada com sucesso!', 'success');
+      // Limpa o formulário após o sucesso
+      e.target.reset();
+      setAudioFile(null);
+      setImageFile(null);
     } catch (error) {
-      setStatus(`Falha no upload: ${error.response?.data?.message || error.message}`);
+      showNotification(error.response?.data?.message || 'Falha no upload.', 'error');
     } finally {
       setLoading(false);
     }
@@ -119,7 +124,6 @@ function UploadPage() {
 
           <button type="submit" className="submit-button" disabled={loading}>{loading ? 'Enviando...' : 'Enviar Música'}</button>
         </form>
-        {status && <p className="status-message">{status}</p>}
       </div>
     </div>
   );
