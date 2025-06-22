@@ -1,0 +1,237 @@
+/* Estilos para Desktop (Padrão) */
+.app-header {
+  background-color: #121212;
+  color: white;
+  padding: 0 2rem;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  flex-shrink: 0; /* Impede que o logo encolha */
+}
+
+.header-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.header-nav a {
+  color: #b3b3b3;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-bottom-color 0.2s;
+}
+
+.header-nav a:hover {
+  color: white;
+}
+
+.header-nav a.active {
+  color: white;
+  border-bottom-color: #1db954;
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-avatar {
+  background-color: #333;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.logout-button {
+  background-color: #1db954;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.logout-button:hover {
+  background-color: #1ed760;
+}
+
+
+/* --- NOVO: Estilos para o Menu Mobile --- */
+.hamburger-menu {
+  display: none; /* Escondido por padrão em telas grandes */
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.mobile-nav {
+  display: none; /* O menu dropdown também é escondido por padrão */
+  position: absolute;
+  top: 70px; /* Abaixo do cabeçalho */
+  left: 0;
+  right: 0;
+  background-color: #121212;
+  flex-direction: column;
+  padding: 1rem;
+  border-top: 1px solid #333;
+}
+
+.mobile-nav a {
+  color: #b3b3b3;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid #222;
+}
+
+.mobile-nav a:last-child {
+  border-bottom: none;
+}
+
+.mobile-nav a.active {
+  color: #1db954;
+}
+
+
+/* --- NOVO: Media Query para Responsividade --- */
+/* Estes estilos só serão aplicados se a tela tiver 768px de largura ou menos */
+@media (max-width: 768px) {
+  .header-nav {
+    display: none; /* Esconde a navegação principal */
+  }
+
+  .user-name {
+    display: none; /* Esconde o nome do usuário para economizar espaço */
+  }
+
+  .hamburger-menu {
+    display: block; /* Mostra o ícone do menu hambúrguer */
+  }
+
+  .mobile-nav.open {
+    display: flex; /* Mostra o menu dropdown quando ele tiver a classe 'open' */
+  }
+}
+
+
+
+/* Container para o perfil e o dropdown */
+.header-user-menu {
+  position: relative; /* Essencial para o posicionamento do dropdown */
+}
+
+/* Área clicável do perfil do usuário */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.user-profile:hover {
+  background-color: #282828;
+}
+
+.dropdown-arrow {
+  font-size: 0.7rem;
+}
+
+/* O menu dropdown em si */
+.user-dropdown {
+  position: absolute;
+  top: 120%; /* Posição abaixo do perfil de usuário */
+  right: 0;
+  background-color: #282828;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  width: 200px;
+  padding: 0.5rem 0;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-item {
+  background: none;
+  border: none;
+  color: #b3b3b3;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #3e3e3e;
+  color: white;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: #444;
+  margin: 0.5rem 0;
+}
+
+.dropdown-item.logout {
+  color: #ff4d4d; /* Cor vermelha para a opção de sair */
+}
+
+.mobile-nav-divider {
+  height: 1px;
+  background-color: #333;
+  margin: 0.5rem 1rem;
+}
+
+.mobile-logout-button {
+  background: none;
+  border: none;
+  color: #ff4d4d; /* Vermelho para a ação de sair */
+  font-size: 1.2rem;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}

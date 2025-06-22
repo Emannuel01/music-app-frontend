@@ -1,0 +1,106 @@
+/* Container principal para um item de música na lista */
+.song-item {
+  display: flex;
+  align-items: center; /* Alinha a imagem, o texto e os botões verticalmente */
+  gap: 1rem; /* Espaço entre a imagem e o bloco de informações */
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  background-color: transparent;
+  border-radius: 8px;
+  list-style-type: none;
+  transition: background-color 0.2s;
+  cursor: pointer; /* O item inteiro é clicável para tocar a música */
+}
+
+.song-item:hover {
+  background-color: #282828; /* Destaque ao passar o mouse */
+}
+
+/* Estilo para a capa do álbum na lista */
+.song-item-artwork {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+  flex-shrink: 0; /* Impede que a imagem encolha se o texto for muito longo */
+}
+
+/* Estilo para o placeholder quando não há imagem de capa */
+.song-item-artwork-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+/* Container para as informações de texto (nome e artista) */
+.song-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Truque para impedir que o texto quebre o layout flex */
+}
+
+.song-name {
+  font-weight: 500;
+  color: white;
+}
+
+.song-artist {
+  font-size: 0.9rem;
+  color: #b3b3b3;
+}
+
+/* Container para os botões de ação na direita */
+.song-actions {
+  margin-left: auto; /* Empurra este container todo para a direita */
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Estilo do botão de remover da playlist (×) */
+.remove-from-playlist-btn {
+  background-color: transparent;
+  border: none;
+  color: #888;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  line-height: 28px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.remove-from-playlist-btn:hover {
+  color: #ff4d4d; /* Fica vermelho ao passar o mouse */
+  transform: scale(1.1);
+}
+
+/* Estilo do botão de Play (▶) */
+.play-button {
+  background-color: #1db954;
+  color: black; /* Preto para melhor contraste com o fundo verde */
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+    
+.play-button:hover {
+  transform: scale(1.05);
+  background-color: #1ed760;
+}

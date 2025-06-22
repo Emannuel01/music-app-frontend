@@ -1,0 +1,20 @@
+.search-page-container {
+  color: white;
+}
+
+.search-bar input {
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  border: 1px solid #555;
+  background-color: #282828;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.search-results ul {
+  padding: 0;
+  margin: 0;
+}

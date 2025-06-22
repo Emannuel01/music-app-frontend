@@ -1,0 +1,101 @@
+/* frontend/src/pages/SettingsPage.css */
+
+.settings-page {
+  color: white;
+}
+
+.settings-page h1 {
+  margin-bottom: 2rem;
+}
+
+/* Estilo para cada "card" de seção */
+.settings-section {
+  background-color: #181818;
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.settings-section h2 {
+  margin-top: 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #333;
+}
+
+/* Grupo de formulário (label + input) */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  color: #b3b3b3;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+/* Estilo unificado para inputs de texto */
+.form-input,
+.read-only-field {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  background-color: #282828;
+  border: 1px solid #555;
+  border-radius: 8px;
+  color: white;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #1db954;
+}
+
+/* Campo de apenas leitura para o email */
+.read-only-field {
+  background-color: #222;
+  color: #b3b3b3;
+}
+
+/* Botão primário (Salvar) */
+.button-primary {
+  padding: 0.8rem 1.5rem;
+  font-weight: bold;
+  background-color: #1db954;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.button-primary:hover {
+  background-color: #1ed760;
+}
+
+/* Seção de perigo (para deletar conta) */
+.danger-zone {
+  border: 1px solid #800000;
+}
+
+.danger-zone p {
+  color: #b3b3b3;
+  font-size: 0.9rem;
+}
+
+/* Botão de perigo */
+.button-danger {
+  padding: 0.8rem 1.5rem;
+  font-weight: bold;
+  background-color: #d93025;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.button-danger:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}

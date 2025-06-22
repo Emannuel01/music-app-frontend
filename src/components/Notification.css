@@ -1,0 +1,42 @@
+.notification-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  z-index: 5000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  animation: slideIn 0.3s ease-out, fadeOut 0.3s ease-in 3.5s;
+}
+
+/* Estilo para notificações de sucesso */
+.notification-toast.success {
+  background-color: #1db954; /* Verde */
+}
+
+/* Estilo para notificações de erro */
+.notification-toast.error {
+  background-color: #d93025; /* Vermelho */
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

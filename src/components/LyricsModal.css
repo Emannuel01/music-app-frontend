@@ -1,0 +1,34 @@
+.lyrics-modal-header {
+  border-bottom: 1px solid #444;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.lyrics-modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.lyrics-modal-header span {
+  font-size: 0.9rem;
+  color: #b3b3b3;
+}
+
+.lyrics-content {
+  /* ESSENCIAL: Respeita as quebras de linha e espaços do texto vindo do banco */
+  white-space: pre-wrap; 
+  max-height: 60vh; /* Altura máxima antes de criar uma barra de rolagem */
+  overflow-y: auto; /* Adiciona barra de rolagem se a letra for muito longa */
+  line-height: 1.7; /* Espaçamento entre as linhas para melhor legibilidade */
+  font-size: 1.1rem;
+  color: #b3b3b3;
+}
+
+/* Estilo da barra de rolagem para um visual mais integrado */
+.lyrics-content::-webkit-scrollbar {
+  width: 8px;
+}
+.lyrics-content::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}

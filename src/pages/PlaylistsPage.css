@@ -1,0 +1,130 @@
+/* frontend/src/pages/PlaylistsPage.css */
+.playlists-page {
+  color: white;
+  position: relative; /* Necessário para o posicionamento do botão flutuante */
+}
+
+/* NOVO: Container para alinhar o título e o botão */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  /* O 'top' do botão flutuante será relativo a este header */
+  position: sticky; 
+  top: 0;
+  background-color: #121212; /* Fundo para não ficar transparente ao rolar */
+  padding: 1rem 0;
+  z-index: 10;
+}
+
+.playlists-page h1 {
+  margin: 0;
+}
+
+/* NOVO: Estilo para o botão flutuante de ação */
+.create-playlist-button {
+  background-color: #1db954; /* Nosso verde padrão */
+  color: white;
+  border: none;
+  border-radius: 50%; /* Deixa o botão perfeitamente redondo */
+  width: 50px;
+  height: 50px;
+  font-size: 2rem;
+  font-weight: 200;
+  line-height: 50px; /* Alinha o '+' verticalmente */
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  flex-shrink: 0; /* Impede que o botão encolha */
+  cursor: pointer;
+}
+
+.create-playlist-button:hover {
+  transform: scale(1.1);
+  background-color: #1ed760;
+}
+
+/* Grid que exibe os cards das playlists */
+.playlists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Estilos do formulário dentro do Modal (sem alterações) */
+.form-error {
+  color: #ff4d4d;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.create-playlist-form {
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-playlist-form input {
+  padding: 0.8rem;
+  font-size: 1rem;
+  background-color: #3e3e3e;
+  border: 1px solid #555;
+  border-radius: 8px;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.create-playlist-form button {
+  padding: 0.8rem 1.5rem;
+  font-weight: bold;
+  background-color: #1db954;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+/* --- RESPONSIVIDADE DO BOTÃO --- */
+@media (max-width: 768px) {
+  .page-header {
+    padding-top: 0;
+    margin-bottom: 1.5rem;
+  }
+  .create-playlist-button {
+    width: 45px;
+    height: 45px;
+    font-size: 1.8rem;
+    line-height: 45px;
+  }
+}
+
+
+/* Adicione no final do arquivo PlaylistsPage.css */
+
+.confirmation-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.confirmation-buttons button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.button-secondary {
+  background-color: #555;
+  color: white;
+}
+
+.button-danger {
+  background-color: #d93025;
+  color: white;
+}

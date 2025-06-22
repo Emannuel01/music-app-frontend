@@ -1,0 +1,106 @@
+.status-message {
+  color: white;
+  font-size: 1.2rem;
+}
+.status-message.error {
+  color: #ff4d4d;
+}
+
+.playlist-detail-container {
+  color: white;
+}
+
+.playlist-header {
+  display: flex;
+  align-items: flex-end; /* Alinha os itens na parte de baixo */
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: linear-gradient(to bottom, #555, #121212 80%);
+  border-radius: 8px;
+}
+
+.playlist-artwork-large {
+  width: 200px;
+  height: 200px;
+  background-color: #333;
+  box-shadow: 0 4px 60px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6rem;
+  color: #777;
+  flex-shrink: 0;
+}
+
+.playlist-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.playlist-type {
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.playlist-meta h1 {
+  font-size: 4rem; /* Título bem grande */
+  margin: 0;
+  line-height: 1.1;
+}
+
+.playlist-meta p {
+  font-size: 1rem;
+  color: #b3b3b3;
+  margin-top: 0.5rem;
+}
+
+.playlist-stats {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  color: #b3b3b3;
+}
+
+.song-list ul {
+  padding: 0;
+  margin: 0;
+}
+
+/* Responsividade para o cabeçalho da playlist */
+@media (max-width: 768px) {
+  .playlist-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .playlist-artwork-large {
+    width: 150px;
+    height: 150px;
+    font-size: 4rem;
+  }
+  .playlist-meta h1 {
+    font-size: 2.5rem;
+  }
+}
+
+.edit-playlist-btn {
+  background-color: transparent;
+  border: 1px solid #888;
+  color: #888;
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-weight: bold;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.edit-playlist-btn:hover {
+  color: white;
+  border-color: white;
+  transform: scale(1.05);
+  cursor: pointer;
+}

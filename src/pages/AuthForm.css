@@ -1,0 +1,128 @@
+/* src/pages/LoginPage.css */
+
+/* Reset Básico */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Container principal */
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1rem;
+  background: linear-gradient(180deg, #3a7bd5 0%, #3a6073 100%);
+  box-sizing: border-box;
+}
+
+/* "Card" do formulário */
+.login-form {
+  background-color: white;
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Título "Login" */
+.login-form h2 {
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+/* Agrupador para cada campo de input */
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+/* Ícone dentro do campo de input */
+.input-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+/* Estilo dos campos de email e senha */
+.form-group input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3.5rem;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  background-color: #f7f7f7;
+  font-size: 1rem;
+  box-sizing: border-box;
+  
+  /* --- ALTERAÇÃO 1: COR DO TEXTO --- */
+  /* Garante que o texto digitado seja escuro e legível */
+  color: #333;
+}
+
+/* --- ALTERAÇÃO 2: ESTILO DO FOCO (AO CLICAR) --- */
+/* Remove a borda azul padrão e a substitui por um brilho sutil (box-shadow) */
+.form-group input:focus {
+  outline: none; /* Remove a borda padrão do navegador */
+  border-color: #3a7bd5; /* Muda a cor da borda para dar feedback */
+  box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.3); /* Adiciona um brilho suave */
+}
+
+/* Botão de Login */
+.login-button {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #3a7bd5 0%, #3a6073 100%);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.login-button:hover {
+  transform: scale(1.02);
+}
+
+/* Estilo para a mensagem de erro */
+.error-message {
+  color: #d93025; /* Vermelho */
+  background-color: #f8d7da; /* Fundo rosa claro */
+  border: 1px solid #f5c6cb;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.login-form p {
+  color: #666; /* Deixa o texto normal ("Já tem uma conta?") cinza */
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.login-form p a {
+  color: #625b5b; /* Deixa o link preto, como solicitado */
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-form p a:hover {
+  text-decoration: underline;
+}

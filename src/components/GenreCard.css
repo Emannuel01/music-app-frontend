@@ -1,0 +1,53 @@
+/* frontend/src/components/GenreCard.css */
+
+.genre-card-link {
+  text-decoration: none;
+  color: white;
+  display: block; /* Garante que o link ocupe o espaço do card */
+}
+
+.genre-card {
+  aspect-ratio: 1 / 1; /* Força o card a ser um quadrado perfeito e responsivo */
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  /* Estilos para a imagem de fundo */
+  background-size: cover;
+  background-position: center;
+}
+
+.genre-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+/* O overlay escuro sobre a imagem para o texto ter contraste */
+.genre-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Gradiente sutil para escurecer a imagem e destacar o texto */
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%);
+  display: flex;
+  align-items: flex-start; /* Alinha o texto no topo */
+  justify-content: flex-start; /* Alinha o texto à esquerda */
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.genre-card h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Em telas menores, o texto pode ser um pouco menor */
+@media (max-width: 768px) {
+  .genre-card h3 {
+    font-size: 1.2rem;
+  }
+}

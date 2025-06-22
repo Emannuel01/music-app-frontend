@@ -1,0 +1,107 @@
+/* frontend/src/components/PlaylistItem.css */
+
+.playlist-card-link {
+  text-decoration: none;
+}
+
+.playlist-card {
+  background-color: #181818;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  color: white;
+  position: relative;
+  height: 100%; /* Garante que o card ocupe o espaço do grid */
+  display: flex; /* Adiciona flexbox para alinhar o conteúdo */
+  flex-direction: column; /* Conteúdo em coluna (capa em cima, texto em baixo) */
+}
+
+.playlist-card:hover {
+  background-color: #282828;
+}
+
+.playlist-artwork {
+  width: 100%;
+  padding-bottom: 100%; /* Truque para criar um container quadrado */
+  position: relative;
+  background-color: #333;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  cursor: pointer;
+}
+
+.playlist-artwork span {
+  font-size: 4rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #777;
+}
+
+/* --- CORREÇÃO PRINCIPAL AQUI --- */
+.playlist-artwork-img {
+  position: absolute; /* Posiciona a imagem dentro do container .playlist-artwork */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+  border-radius: 6px;
+}
+
+.playlist-info {
+  /* Não precisamos mais de min-height, o flexbox cuidará do alinhamento */
+  margin-top: auto; /* Empurra o texto para a parte de baixo do card */
+}
+
+.playlist-name {
+  font-weight: bold;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playlist-description {
+  font-size: 0.9rem;
+  color: #b3b3b3;
+  margin-top: 0.25rem;
+}
+
+.delete-playlist-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px; /* Trocamos 'left' por 'right' */
+  width: 28px;
+  height: 28px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 5; /* Garante que ele fique sobre o conteúdo do card */
+}
+
+.playlist-card:hover .delete-playlist-btn {
+  opacity: 1;
+}
+
+.delete-playlist-btn:hover {
+  background-color: #ff4d4d;
+  transform: scale(1.1);
+}
+
+.playlist-artwork-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px; /* Para manter as bordas arredondadas do container */
+}
