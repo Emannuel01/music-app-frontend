@@ -56,7 +56,7 @@ function UploadPage() {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:3000/api/audio/upload', data, {
+      await axios.post('https://music-app-backend-aacp.onrender.com/api/audio/upload', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`
