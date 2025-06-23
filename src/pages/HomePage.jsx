@@ -10,14 +10,13 @@ import PlaylistItem from '../components/PlaylistItem';
 import SongItem from '../components/SongItem';
 import GenreCard from '../components/GenreCard';
 
-// --- Imagens de Gêneros ---
-// Certifique-se de que os caminhos e nomes dos arquivos estão corretos
+// Suas imagens de Gêneros
 import sambaImg from '../assets/genres/samba.jpeg'; 
 import eletronicaImg from '../assets/genres/eletronic.jpg';
+// Adicione outros imports se necessário
 
-// Lista estática de gêneros para descoberta
 const browseGenres = [
-  { name: 'Rock',       image: null,       color: '#800000' },
+  { name: 'Rock',       image: null,          color: '#800000' },
   { name: 'Pop',        image: null,          color: '#3a7bd5' },
   { name: 'Samba',      image: sambaImg,      color: '#f2994a' },
   { name: 'Eletrônica', image: eletronicaImg, color: '#9d50bb' },
@@ -34,30 +33,26 @@ function HomePage() {
   const [isUserEmpty, setIsUserEmpty] = useState(true);
 
   useEffect(() => {
-    // Apenas busca dados se houver um token
     if (token) {
       setLoading(true);
       
-      // Busca todos os dados necessários em paralelo para mais eficiência
       Promise.all([
         playlistService.getMyPlaylists(),
         favoriteService.getMyFavorites(),
         historyService.getRecentPlays(),
-        recommendationService.getForYou()
+        recommendationService.getForYou() 
       ]).then(([playlistsData, favoritesData, recentPlaysData, recommendationsData]) => {
         
-        // Define se o usuário tem conteúdo personalizado ou não
+        // --- CORREÇÃO AQUI ---
+        // A condição agora verifica todos os 3 tipos de dados para decidir se o usuário é "vazio"
         const hasContent = playlistsData.length > 0 || favoritesData.length > 0 || recentPlaysData.length > 0;
         setIsUserEmpty(!hasContent);
 
-        // Salva as recomendações no estado
         setRecommendations(recommendationsData);
         
-        // Lógica para montar a prateleira de playlists (reais e virtuais)
         if (hasContent) {
           const virtualPlaylists = [];
 
-          // Cria a playlist virtual de "Músicas Curtidas" se houver favoritos
           if (favoritesData.length > 0) {
             virtualPlaylists.push({
               id: 'favorites',
@@ -69,7 +64,6 @@ function HomePage() {
             });
           }
           
-          // Cria a playlist virtual de "Ouvidas Recentemente" se houver histórico
           if (recentPlaysData.length > 0) {
             virtualPlaylists.push({
               id: 'recent',
@@ -81,7 +75,7 @@ function HomePage() {
             });
           }
           
-          // Combina as playlists virtuais com as playlists reais do usuário
+          // Monta a lista final que será exibida
           setDisplayPlaylists([...virtualPlaylists, ...playlistsData]);
         }
 
@@ -91,7 +85,7 @@ function HomePage() {
         setLoading(false);
       });
     } else {
-      // Limpa tudo se o usuário não estiver logado
+      // Limpa os estados no logout
       setDisplayPlaylists([]);
       setRecommendations([]);
       setIsUserEmpty(true);
@@ -99,18 +93,17 @@ function HomePage() {
     }
   }, [token]);
 
-
   // Se o usuário não estiver logado
   if (!token) {
     return (
-      <div>
+      <div style={{ color: 'white', padding: '2rem' }}>
         <h1>Bem-vindo ao MusicApp</h1>
         <p><Link to="/login">Faça login</Link> para começar a sua jornada musical.</p>
       </div>
     );
   }
 
-  // Se estiver carregando os dados iniciais
+  // Se estiver carregando os dados
   if (loading) {
     return <p style={{ color: 'white' }}>Carregando sua home base...</p>;
   }
@@ -120,7 +113,7 @@ function HomePage() {
       <h1>Início</h1>
       
       {isUserEmpty ? (
-        // Conteúdo para novos usuários, focado na descoberta
+        // Conteúdo para novos usuários
         <div>
           <p style={{ color: '#b3b3b3', fontSize: '1.1rem' }}>
             Parece que está um pouco vazio por aqui. Explore alguns gêneros para começar!
@@ -132,7 +125,7 @@ function HomePage() {
           />
         </div>
       ) : (
-        // Conteúdo para usuários existentes, com conteúdo personalizado
+        // Conteúdo para usuários existentes
         <>
           <ContentShelf
             title="Recomendado para você"

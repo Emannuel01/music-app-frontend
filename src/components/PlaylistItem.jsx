@@ -4,7 +4,11 @@ import './PlaylistItem.css';
 
 function PlaylistItem({ playlist, onDeleteClick }) {
   
-  const coverArtUrl = playlist.audios?.[0]?.album_art_filename;
+
+   const coverArtUrl = playlist.audios?.[0]?.album_art_filename
+    ? `${import.meta.env.VITE_BACKEND_URL}/files/${playlist.audios?.[0]?.album_art_filename}` 
+    : null;
+
   
   const handleDelete = (event) => {
     event.preventDefault();

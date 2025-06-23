@@ -48,18 +48,19 @@ export const PlayerProvider = ({ children }) => {
   }, [volume]);
 
   // Funções de Controle do Player
-  const playSong = (song, songList = []) => {
-    const songUrl = song.filename;
+ const playSong = (song, songList = []) => {
+    // VOLTAMOS A MONTAR A URL PARA A NOSSA PRÓPRIA API DE STREAMING
+    const songUrl = `${import.meta.env.VITE_BACKEND_URL}/api/audio/${song.id}/play`;
     
     if (currentSong?.id === song.id) {
-      togglePlayPause();
+        togglePlayPause();
     } else {
-      setCurrentSong({ ...song, url: songUrl });
-      setQueue(songList);
-      const newIndex = songList.findIndex(item => item.id === song.id);
-      setCurrentQueueIndex(newIndex);
+        setCurrentSong({ ...song, url: songUrl }); 
+        setQueue(songList);
+        const newIndex = songList.findIndex(item => item.id === song.id);
+        setCurrentQueueIndex(newIndex);
     }
-  };
+  }
 
   const togglePlayPause = () => {
     if (!currentSong) return;

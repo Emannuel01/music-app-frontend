@@ -10,7 +10,11 @@ function SongItem({ song, songList, onRemoveClick }) {
     action(value);
   };
 
-  const artworkUrl = song.album_art_filename;
+  // --- CORREÇÃO AQUI ---
+  // Montamos a URL da imagem da mesma forma
+  const artworkUrl = song.album_art_filename 
+    ? `${import.meta.env.VITE_BACKEND_URL}/files/${song.album_art_filename}`
+    : null;
 
   return (
     <li className="song-item" onClick={() => playSong(song, songList)}>
@@ -19,23 +23,15 @@ function SongItem({ song, songList, onRemoveClick }) {
       ) : (
         <div className="song-item-artwork-placeholder">🎵</div>
       )}
-
       <div className="song-info">
         <span className="song-name">{song.music_name}</span>
         <span className="song-artist">{song.author} ({song.year || ''})</span>
       </div>
-      
       <div className="song-actions">
         {onRemoveClick && (
-          <button 
-            className="remove-from-playlist-btn" 
-            onClick={(e) => handleActionClick(e, onRemoveClick, song)}
-          >×</button>
+          <button className="remove-from-playlist-btn" onClick={(e) => handleActionClick(e, onRemoveClick, song)}>×</button>
         )}
-        <button 
-          className="play-button" 
-          onClick={(e) => handleActionClick(e, playSong, song, songList)}
-        >▶</button>
+        <button className="play-button" onClick={(e) => handleActionClick(e, playSong, song, songList)}>▶</button>
       </div>
     </li>
   );

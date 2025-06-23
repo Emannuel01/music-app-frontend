@@ -5,33 +5,31 @@
   left: 0;
   width: 100%;
   height: 90px;
-  z-index: 2000; /* Garante que o player fique sobre todos os outros elementos */
+  z-index: 2000;
   background-color: #181818;
   border-top: 1px solid #282828;
   box-sizing: border-box;
   color: white;
-  
-  /* Layout em 3 colunas para alinhar tudo de forma organizada */
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr; /* Esquerda: 1 parte, Centro: 2 partes, Direita: 1 parte */
+  grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
   padding: 0 1rem;
 }
 
-/* --- Coluna 1: Informações da Música --- */
+/* Coluna 1: Informações da Música */
 .player-song-info {
   display: flex;
   align-items: center;
   gap: 1rem;
-  justify-self: start; /* Alinha à esquerda */
-  min-width: 0; /* Impede que o texto quebre o layout */
+  justify-self: start;
+  min-width: 0;
 }
 
 .player-artwork {
   width: 56px;
   height: 56px;
   border-radius: 4px;
-  object-fit: cover; /* Garante que a imagem não fique distorcida */
+  object-fit: cover;
 }
 
 .player-artwork-placeholder {
@@ -56,14 +54,14 @@
 .player-song-name, .player-song-artist {
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* Adiciona "..." se o texto for muito longo */
+  text-overflow: ellipsis;
 }
 
 .player-song-name { font-weight: 500; }
 .player-song-artist { font-size: 0.8rem; color: #b3b3b3; }
 
 
-/* --- Coluna 2: Controles Principais --- */
+/* Coluna 2: Controles Principais */
 .player-center-controls {
   display: flex;
   flex-direction: column;
@@ -87,41 +85,39 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+  padding: 4px; /* Adicionado para garantir o clique em ícones SVG */
 }
 
 .control-button:focus {
-  outline: none; /* Remove a borda azul ao clicar/focar */
+  outline: none;
 }
 
 .control-button.play-pause {
-  background-color: #1db954; /* Cor de destaque */
+  background-color: #1db954;
   color: black;
   width: 36px;
   height: 36px;
   font-size: 1rem;
+  padding: 0; /* Reset do padding para o botão principal */
   transition: transform 0.1s, background-color 0.2s;
 }
 
-.control-button.play-pause:hover {
+.control-button.play-pause:hover { 
   transform: scale(1.05);
   background-color: #1ed760;
 }
 
 .control-button.secondary {
-  background: none;
-  border: none;
-  color: #b3b3b3;
-  font-size: 1.5rem; /* Este tamanho agora se aplica ao '+' e '♥' */
-  cursor: pointer;
+  font-size: 1.5rem;
   transition: color 0.2s;
-  /* NOVO: Garante que todos os ícones fiquem centralizados e do mesmo tamanho */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px;
 }
+
 .control-button.secondary:hover {
   color: white;
+}
+
+.control-button.secondary.active {
+  color: #1db954;
 }
 
 .progress-bar-container {
@@ -131,28 +127,28 @@
   width: 100%;
 }
 
-.time-display {
-  font-size: 0.8rem;
-  color: #b3b3b3;
-  min-width: 40px;
-  text-align: center;
+.time-display { 
+  font-size: 0.8rem; 
+  color: #b3b3b3; 
+  min-width: 40px; 
+  text-align: center; 
 }
 
-/* --- Coluna 3: Controles da Direita --- */
+/* Coluna 3: Controles da Direita */
 .player-right-controls {
-  justify-self: end; /* Alinha à direita */
+  justify-self: end;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   color: #b3b3b3;
 }
-
-/* --- Estilo Genérico para Sliders (Progresso e Volume) --- */
+    
+/* Estilo Genérico para Sliders */
 .progress-bar, .volume-slider {
   -webkit-appearance: none;
   appearance: none;
   height: 4px;
-  background: #4d4d4d; /* Cor da parte não preenchida (será sobreposta pelo estilo inline) */
+  background: #4d4d4d;
   outline: none;
   border-radius: 2px;
   cursor: pointer;
@@ -170,7 +166,6 @@
   border-radius: 50%;
   transition: transform 0.2s;
 }
-
 .progress-bar::-moz-range-thumb,
 .volume-slider::-moz-range-thumb {
   width: 12px;
@@ -179,28 +174,34 @@
   border-radius: 50%;
   border: none;
 }
-
 .progress-bar:hover::-webkit-slider-thumb,
 .volume-slider:hover::-webkit-slider-thumb {
   transform: scale(1.2);
 }
 
-/* --- Responsividade --- */
+/* --- RESPONSIVIDADE CORRIGIDA --- */
 @media (max-width: 768px) {
   .player-bar {
-    grid-template-columns: 1fr;
-    justify-content: center;
-    padding: 0;
+    /* Em telas pequenas, as colunas laterais se ajustam */
+    grid-template-columns: 1fr auto; /* Coluna do meio e da direita */
+    padding: 0 1rem;
+    gap: 1rem;
   }
-  .player-song-info, .player-right-controls {
-    display: none; /* Esconde as colunas laterais no mobile */
+
+  /* Escondemos a informação da música para dar espaço */
+  .player-song-info {
+    display: none;
   }
+
+  /* Escondemos APENAS o controle de volume e seu ícone nos controles da direita */
+  .player-right-controls .volume-slider,
+  .player-right-controls > span { /* O span é o ícone 🔊 */
+    display: none;
+  }
+  
+  /* Garantimos que os botões que sobraram fiquem alinhados */
   .player-center-controls {
-    width: 90%; /* Centraliza e ocupa quase toda a tela */
+    justify-self: start; /* Alinha os controles principais à esquerda */
+    width: auto;
   }
 }
-
-.control-button.secondary.active {
-  color: #1db954; /* Cor verde para quando a música está favoritada */
-}
-

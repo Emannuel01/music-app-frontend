@@ -33,7 +33,11 @@ function Player() {
     background: `linear-gradient(to right, #1db954 ${volumePercentage}%, #4d4d4d ${volumePercentage}%)`
   };
 
-  const artworkUrl = currentSong.album_art_filename;
+  const artworkUrl = currentSong.album_art_filename 
+    ? `${import.meta.env.VITE_BACKEND_URL}/files/${currentSong.album_art_filename}` 
+    : null;
+
+
 
   return (
     <>
